@@ -12,7 +12,7 @@ var Category = mongoose.model('categories', {
     source: {web: String, link: String}
 });
 
-app.get('/bot-category', function (req, res) {
+app.get('/categories', function (req, res) {
 
     var baseUrl = 'https://weworkremotely.com';
 
@@ -21,7 +21,7 @@ app.get('/bot-category', function (req, res) {
             var $ = cheerio.load(html);
 
             var category = {
-                title: '', link: '', source: {web: 'We Work Remotly', link: baseUrl}
+                title: '', link: '', source: {web: 'We Work Remotely', link: baseUrl}
             };
 
             // #category-7 > article > h2 > a:nth-child(1)

@@ -21,7 +21,7 @@ var Job = mongoose.model('jobs', {
 });
 
 
-app.get('/bot-jobs', function (req, res) {
+app.get('/jobs', function (req, res) {
 
     var baseUrl = 'https://weworkremotely.com';
 
@@ -77,12 +77,6 @@ app.get('/bot-jobs', function (req, res) {
                 res.status(200).send()
             });
         });
-    });
-});
-
-app.get('/get-jobs', function (req, res) {
-    Job.find({}, function (err, docs) {
-        res.json(docs);
     });
 });
 

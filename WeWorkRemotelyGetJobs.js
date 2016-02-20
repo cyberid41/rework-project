@@ -49,18 +49,14 @@ app.get('/jobs', function (req, res) {
                     //#category-5 > article > ul > li.feature > a
                     $('.jobs-container > section > article > ul > li > a').filter(function () {
                         job.link = baseUrl + $(this).attr('href');
-                        var dtTitle = $(this).text();
 
-                        // replace \n to space
-                        var replaceSpace = dtTitle.replace(/\n/g, ' ');
-
-                        var title = replaceSpace.split('     ');
                         var today = new Date();
                         var year = today.getFullYear();
 
-                        job.company = title[1];
-                        job.title = title[2];
-                        job.date = title[3] + ' ' + year;
+                        // #category-6 > article > ul > li:nth-child(1) > a > span.company
+                        job.company = $('ul > li:nth-child(1) > a > span.company').text();
+                        job.title = $('ul > li:nth-child(1) > a > span.title').text();
+                        job.date = $('ul > li:nth-child(1) > a > span.date').text() + ' ' + year;
 
                         var bot = new Job(job);
                         bot.save(function (error) {

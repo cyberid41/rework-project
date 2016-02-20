@@ -16,6 +16,7 @@ var Job = mongoose.model('jobs', {
     link: String,
     company: String,
     date: String,
+    new: String,
     source: {web: String, link: String},
     category: {title: String, link: String}
 });
@@ -37,6 +38,7 @@ app.get('/jobs', function (req, res) {
                         link: '',
                         company: '',
                         date: '',
+                        new: '',
                         category: {
                             title: entry.title,
                             link: entry.link
@@ -57,6 +59,8 @@ app.get('/jobs', function (req, res) {
                         job.company = $('ul > li:nth-child(1) > a > span.company').text();
                         job.title = $('ul > li:nth-child(1) > a > span.title').text();
                         job.date = $('ul > li:nth-child(1) > a > span.date').text() + ' ' + year;
+                        // #category-6 > article > ul > li:nth-child(3) > span
+                        job.new = $('article > ul > li:nth-child(3) > span').text();
 
                         var bot = new Job(job);
                         bot.save(function (error) {

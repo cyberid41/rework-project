@@ -22,6 +22,7 @@ var JobDetail = mongoose.model('job_detail', {
     body: String,
     company: String,
     date: String,
+    new: String,
     apply: String,
     source: {web: String, link: String},
     category: {title: String, link: String}
@@ -45,6 +46,7 @@ app.get('/detail', function (req, res) {
                         web: '',
                         body: '',
                         company: '',
+                        new: entry.new,
                         date: entry.date,
                         apply: '',
                         source: {web: entry.source.web, link: entry.source.link},

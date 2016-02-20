@@ -1,0 +1,13 @@
+{
+  "name": "nodescrap",
+  "version": "0.0.1",
+  "description": "Scrape Remote Working web.",
+  "main": "server.js",
+  "author": "cyberid41",
+  "dependencies": {
+    "express": "latest",
+    "request": "latest",
+    "cheerio": "latest",
+    "mongoose": "latest"
+  }
+}

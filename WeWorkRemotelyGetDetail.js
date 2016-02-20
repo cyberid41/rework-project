@@ -22,6 +22,7 @@ var JobDetail = mongoose.model('job_detail', {
     body: String,
     company: String,
     date: String,
+    apply: String,
     source: {web: String, link: String},
     category: {title: String, link: String}
 });
@@ -43,31 +44,35 @@ app.get('/detail', function (req, res) {
                         location: '',
                         web: '',
                         body: '',
-                        company: entry.company,
+                        company: '',
                         date: entry.date,
+                        apply: '',
                         source: {web: entry.source.web, link: entry.source.link},
                         category: {title: entry.category.title, link: entry.category.link}
                     };
 
                     // body > div.container > div.content > div.listing-header > div.listing-header-container > h2 > span.location
                     $('div.listing-header-container > h2').filter(function () {
-                        var loc = $(this).text();
-                        var replaceSpace = loc.replace(/\n/g, ' ');
-                        var locA = replaceSpace.split('       ');
 
-                        detail.location = locA[2];
-                        detail.web = locA[4];
+                        // body > div.container > div.content > div.listing-header > div.listing-header-container > h2 > span.company
+                        detail.company = $('div.listing-header-container > h2 > span.company').text();
+                        // body > div.container > div.content > div.listing-header > div.listing-header-container > h2 > span.location
+                        detail.location = $('div.listing-header-container > h2 > span.location').text();
+                        // body > div.container > div.content > div.listing-header > div.listing-header-container > h2 > a
+                        detail.web = $('div.listing-header-container > h2 > a').attr('href');
+                        // body > div.container > div.content > section > div.listing-container
+                        detail.body = $('div.listing-container').text();
+                        // body > div.container > div.content > div.apply > p
+                        detail.apply = $('div.apply > p').text();
 
-                        console.log(detail);
-
-                        //var bot = new Job(job);
-                        //bot.save(function (error) {
-                        //    if (!error) {
-                        //        console.log('DB Saved!')
-                        //    } else {
-                        //        console.log('Something wrong! with message '.error)
-                        //    }
-                        //});
+                        var bot = new JobDetail(detail);
+                        bot.save(function (error) {
+                            if (!error) {
+                                console.log('DB Saved!')
+                            } else {
+                                console.log('Something wrong! with message '.error)
+                            }
+                        });
                     });
                 }
 

@@ -8,7 +8,7 @@ var app = express();
 var Category = mongoose.model('categories', {
     title: String,
     link: String,
-    source: {web: String, link: String}
+    web: String
 });
 
 var Job = mongoose.model('jobs', {
@@ -17,7 +17,7 @@ var Job = mongoose.model('jobs', {
     company: String,
     date: String,
     new: String,
-    source: {web: String, link: String},
+    web: String,
     category: {title: String, link: String}
 });
 
@@ -26,7 +26,7 @@ app.get('/jobs', function (req, res) {
 
     var baseUrl = 'https://weworkremotely.com';
 
-    Category.find({}, function (err, docs) {
+    Category.find({web: baseUrl}, function (err, docs) {
         docs.forEach(function (entry) {
 
             request(entry.link, function (error, response, html) {
@@ -43,9 +43,7 @@ app.get('/jobs', function (req, res) {
                             title: entry.title,
                             link: entry.link
                         },
-                        source: {
-                            web: entry.source.web, link: entry.source.link
-                        }
+                        web: entry.web
                     };
 
                     //#category-5 > article > ul > li.feature > a
@@ -58,7 +56,7 @@ app.get('/jobs', function (req, res) {
                         // #category-6 > article > ul > li:nth-child(1) > a > span.company
                         job.company = $('ul > li:nth-child(1) > a > span.company').text();
                         job.title = $('ul > li:nth-child(1) > a > span.title').text();
-                        job.date = $('ul > li:nth-child(1) > a > span.date').text() + ' ' + year;
+                        job.date = year + ' ' + $('ul > li:nth-child(1) > a > span.date').text();
                         // #category-6 > article > ul > li:nth-child(3) > span
                         job.new = $('article > ul > li:nth-child(3) > span').text();
 

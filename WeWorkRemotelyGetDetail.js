@@ -10,7 +10,7 @@ var Job = mongoose.model('jobs', {
     link: String,
     company: String,
     date: String,
-    source: {web: String, link: String},
+    source: {web: String},
     category: {title: String, link: String}
 });
 
@@ -18,13 +18,12 @@ var JobDetail = mongoose.model('job_detail', {
     title: String,
     link: String,
     location: String,
-    web: String,
     body: String,
     company: String,
     date: String,
     new: String,
     apply: String,
-    source: {web: String, link: String},
+    web: String,
     category: {title: String, link: String}
 });
 
@@ -43,13 +42,12 @@ app.get('/detail', function (req, res) {
                         title: entry.title,
                         link: entry.link,
                         location: '',
-                        web: '',
                         body: '',
                         company: '',
                         new: entry.new,
                         date: entry.date,
                         apply: '',
-                        source: {web: entry.source.web, link: entry.source.link},
+                        web: entry.web,
                         category: {title: entry.category.title, link: entry.category.link}
                     };
 

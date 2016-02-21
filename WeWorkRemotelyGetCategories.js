@@ -9,10 +9,10 @@ var app = express();
 var Category = mongoose.model('categories', {
     title: String,
     link: String,
-    source: {web: String, link: String}
+    web: String
 });
 
-app.get('/categories', function (req, res) {
+app.get('/bot-categories', function (req, res) {
 
     var baseUrl = 'https://weworkremotely.com';
 
@@ -21,7 +21,7 @@ app.get('/categories', function (req, res) {
             var $ = cheerio.load(html);
 
             var category = {
-                title: '', link: '', source: {web: 'We Work Remotely', link: baseUrl}
+                title: '', link: '', web: baseUrl
             };
 
             // #category-7 > article > h2 > a:nth-child(1)
@@ -41,9 +41,16 @@ app.get('/categories', function (req, res) {
         }
 
         // Finally, we'll just send out a message to the browser reminding you that this app does not have a UI.
-        res.send('Check your console!')
+        res.status(200).send()
     });
 
+});
+
+app.get('/get-categories', function (req, res) {
+    Category.find({web: 'https://weworkremotely.com'}
+        , function (err, docs) {
+            res.json(docs);
+        }).limit(6);
 });
 
 String.prototype.replaceAll = function (search, replacement) {

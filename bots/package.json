@@ -4,6 +4,9 @@
   "description": "Scrape Remote Working web.",
   "main": "server.js",
   "author": "cyberid41",
+  "scripts": {
+    "wework_remotely": "node scrapWeworkRemotely"
+  },
   "dependencies": {
     "express": "latest",
     "request": "latest",

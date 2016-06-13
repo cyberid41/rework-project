@@ -50,12 +50,15 @@ request(baseUrl, function (error, response, html) {
             var bot = new Category(category);
             bot.save(function (error) {
                 if (!error) {
-                    console.log('Category Saved!')
+
                 } else {
                     console.log('Something wrong! with message '.error)
                 }
             });
+
         });
+
+        console.log('Category Saved!')
 
         // run get jobs
         Category.find({web: baseUrl}, function (err, docs) {

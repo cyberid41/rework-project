@@ -16,4 +16,4 @@
 
 // Get data Categories, Jobs & Detail Jobs
 
-`$ node scrapWeworkRemotely.js`
+`$ npm run wework_remotely`

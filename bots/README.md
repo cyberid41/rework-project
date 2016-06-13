@@ -14,14 +14,6 @@
 
 `$ npm install`
 
-// Get categories
+// Get data Categories, Jobs & Detail Jobs
 
-`$ node WeWorkRemotlyGetCategories.js`
-
-// Get Jobs by Categories
-
-`$ node WeWorkRemotlyGetJobs.js`
-
-// Get Detail Jobs
-
-`$ node WeWorkRemotlyGetDetail.js`
+`$ node scrapWeworkRemotely.js`

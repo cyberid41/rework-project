@@ -1,9 +1,7 @@
-var express = require('express');
 var request = require('request');
 var cheerio = require('cheerio');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/reworks');
-var app = express();
 
 var Category = mongoose.model('categories', {
     title: String,
@@ -22,7 +20,6 @@ var Job = mongoose.model('jobs', {
 });
 
 
-app.get('/jobs', function (req, res) {
 
     var baseUrl = 'https://weworkremotely.com';
 
@@ -71,25 +68,11 @@ app.get('/jobs', function (req, res) {
                     });
                 }
 
-                // Finally, we'll just send out a message to the browser reminding you that this app does not have a UI.
-                res.status(200).send()
             });
         });
     });
-});
-
-app.get('/get-jobs', function (req, res) {
-    Job.find({web: 'https://weworkremotely.com'}
-        , function (err, docs) {
-            res.json(docs);
-        }).limit(1000);
-});
 
 String.prototype.replaceAll = function (search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
 };
-
-app.listen('8080');
-console.log('Magic happens on port 8080');
-exports = module.exports = app;

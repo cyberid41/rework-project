@@ -2,7 +2,7 @@ var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/reworks5');
+mongoose.connect('mongodb://localhost/reworks');
 
 var Category = mongoose.model('categories', {
     title: String,

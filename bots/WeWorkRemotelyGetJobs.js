@@ -2,7 +2,7 @@ var express = require('express');
 var request = require('request');
 var cheerio = require('cheerio');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/nodescrap');
+mongoose.connect('mongodb://localhost/reworks');
 var app = express();
 
 var Category = mongoose.model('categories', {
@@ -76,6 +76,13 @@ app.get('/jobs', function (req, res) {
             });
         });
     });
+});
+
+app.get('/get-jobs', function (req, res) {
+    Job.find({web: 'https://weworkremotely.com'}
+        , function (err, docs) {
+            res.json(docs);
+        }).limit(1000);
 });
 
 String.prototype.replaceAll = function (search, replacement) {

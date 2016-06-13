@@ -3,7 +3,7 @@ var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/nodescrap');
+mongoose.connect('mongodb://localhost/reworks');
 var app = express();
 
 var Category = mongoose.model('categories', {

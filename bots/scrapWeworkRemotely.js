@@ -149,7 +149,7 @@ request(baseUrl, function (error, response, html) {
                             var bot = new JobDetail(detail);
                             bot.save(function (error) {
                                 if (!error) {
-                                    console.log('DB Saved job Detail!')
+
                                 } else {
                                     console.log('Something wrong! with message '.error)
                                 }
